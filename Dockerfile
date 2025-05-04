@@ -1,18 +1,20 @@
-# Use an official lightweight Python image
-FROM python:3.10-slim
+# Use a lightweight Python base
+FROM python:3.11-slim
 
-# Set working directory
+# Set work directory
 WORKDIR /app
 
-# Copy requirements and install
+# Copy requirements if you have one (recommended)
 COPY requirements.txt .
+
+# Install Python dependencies
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy the rest of the app
+# Copy the rest of your app code
 COPY . .
 
-# Expose port (if your app runs on a specific port)
-EXPOSE 8501 
+# Expose Streamlit’s port
+EXPOSE 8501
 
-# Run your Python app (adjust if needed)
-CMD ["streamlit", "run", "app.py", "--server.port=8501", "--server.address=0.0.0.0"]
+# Run the app
+CMD ["streamlit", "run", "your_app_file.py", "--server.port=8501", "--server.address=0.0.0.0"]
